@@ -6,8 +6,8 @@ import (
 
 	"go.uber.org/ratelimit"
 
+	"github.com/Khranovskiy/go-recipes/rl/fixed_window"
 	"github.com/Khranovskiy/go-recipes/rl/leaky_bucket"
-	"github.com/Khranovskiy/go-recipes/rl/tb"
 	"github.com/Khranovskiy/go-recipes/rl/token_bucket"
 )
 
@@ -49,7 +49,7 @@ func mainThrottled() {
 	}
 
 	const rps = 1
-	handle, cancel := tb.Throttle(rps, work)
+	handle, cancel := fixed_window.Throttle(rps, work)
 	defer cancel()
 
 	start := time.Now()
